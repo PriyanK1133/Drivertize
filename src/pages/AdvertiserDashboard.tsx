@@ -1,0 +1,317 @@
+import React, { useState } from 'react';
+import { BarChart3, MapPin, Users, TrendingUp, Calendar, Settings, Bell, Plus, Eye, Pause, Play } from 'lucide-react';
+
+const AdvertiserDashboard = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+  const [campaigns, setCampaigns] = useState([
+    { 
+      id: 1, 
+      name: 'Summer Sale Campaign', 
+      status: 'Active', 
+      reach: 45000, 
+      budget: 35000, 
+      spent: 28000,
+      reach: 45000,
+      vehicles: 15,
+      startDate: '2024-01-15',
+      endDate: '2024-02-15'
+    },
+    { 
+      id: 2, 
+      name: 'New Product Launch', 
+      status: 'Scheduled', 
+      reach: 25000, 
+      budget: 20000, 
+      spent: 0,
+      reach: 25000,
+      vehicles: 10,
+      startDate: '2024-02-20',
+      endDate: '2024-03-20'
+    },
+    { 
+      id: 3, 
+      name: 'Brand Awareness', 
+      status: 'Completed', 
+      reach: 78000, 
+      budget: 50000, 
+      spent: 50000,
+      reach: 78000,
+      vehicles: 25,
+      startDate: '2023-12-01',
+      endDate: '2024-01-01'
+    }
+  ]);
+
+  const [stats, setStats] = useState({
+    totalReach: 148000,
+    activeCampaigns: 1,
+    totalSpent: 78000,
+    activeVehicles: 15
+  });
+
+  const handleCampaignAction = (id: number, action: string) => {
+    // View campaign details - functionality would be implemented here
+    console.log(`Viewing campaign ${id}`);
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'Active': return 'bg-green-100 text-green-800';
+      case 'Scheduled': return 'bg-yellow-100 text-yellow-800';
+      case 'Paused': return 'bg-orange-100 text-orange-800';
+      case 'Completed': return 'bg-gray-100 text-gray-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 pt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Demo Warning */}
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8">
+          <div className="flex">
+            <div className="ml-3">
+              <p className="text-sm text-yellow-700">
+                <strong>Demo Dashboard:</strong> This is a demonstration dashboard. All functionality will not work in the actual implementation.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Campaign Dashboard</h1>
+            <p className="text-gray-600">Manage and track your advertising campaigns</p>
+          </div>
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <button className="p-2 text-gray-400 hover:text-blue-600 transition-colors relative">
+              <Bell className="h-5 w-5 sm:h-6 sm:w-6" />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center">3</span>
+            </button>
+            <button className="bg-blue-600 text-white px-3 py-2 sm:px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center text-sm">
+              <Plus className="h-4 w-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">New Campaign</span>
+              <span className="sm:hidden">New</span>
+            </button>
+            <button className="p-2 text-gray-400 hover:text-blue-600 transition-colors">
+              <Settings className="h-5 w-5 sm:h-6 sm:w-6" />
+            </button>
+          </div>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="bg-white rounded-lg p-1 shadow-sm mb-8">
+          <div className="grid grid-cols-2 sm:flex sm:space-x-1 gap-1 sm:gap-0">
+            {['overview', 'campaigns', 'analytics', 'vehicles'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-3 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-colors capitalize text-sm sm:text-base ${
+                  activeTab === tab
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-600 hover:text-blue-600'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {activeTab === 'overview' && (
+          <div className="space-y-6 sm:space-y-8">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-green-600 font-medium">Active Campaigns</p>
+                    <p className="text-xl sm:text-2xl font-bold text-green-900">{stats.activeCampaigns}</p>
+                    <p className="text-xs text-gray-500 mt-1">2 scheduled</p>
+                  </div>
+                  <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-yellow-600 font-medium">Total Spent</p>
+                    <p className="text-xl sm:text-2xl font-bold text-yellow-900">₹{stats.totalSpent.toLocaleString()}</p>
+                    <p className="text-xs text-gray-500 mt-1">₹22k remaining</p>
+                  </div>
+                  <Calendar className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-600" />
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-purple-600 font-medium">Active Vehicles</p>
+                    <p className="text-xl sm:text-2xl font-bold text-purple-900">{stats.activeVehicles}</p>
+                    <p className="text-xs text-green-600 mt-1">Mobile billboards</p>
+                  </div>
+                  <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-blue-600 font-medium">Daily Coverage</p>
+                    <p className="text-xl sm:text-2xl font-bold text-blue-900">120 km/day</p>
+                    <p className="text-xs text-gray-500 mt-1">Average per vehicle</p>
+                  </div>
+                  <BarChart3 className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+                </div>
+              </div>
+            </div>
+
+            {/* Recent Campaigns */}
+            <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Campaigns</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[600px]">
+                  <thead>
+                    <tr className="text-left text-sm text-gray-500 border-b">
+                      <th className="pb-3">Campaign</th>
+                      <th className="pb-3">Status</th>
+                      <th className="pb-3">Budget</th>
+                      <th className="pb-3">Spent</th>
+                      <th className="pb-3">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {campaigns.slice(0, 3).map((campaign) => (
+                      <tr key={campaign.id} className="border-b border-gray-100">
+                        <td className="py-4">
+                          <div className="font-medium text-gray-900">{campaign.name}</div>
+                          <div className="text-sm text-gray-500">{campaign.vehicles} vehicles</div>
+                        </td>
+                        <td className="py-4">
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(campaign.status)}`}>
+                            {campaign.status}
+                          </span>
+                        </td>
+                        <td className="py-4 text-gray-600">{campaign.reach.toLocaleString()}</td>
+                        <td className="py-4 font-medium text-gray-900">₹{campaign.spent.toLocaleString()}</td>
+                        <td className="py-4">
+                          <div className="flex space-x-2">
+                            <button className="p-1 text-gray-400 hover:text-blue-600">
+                              <Eye className="h-4 w-4" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'campaigns' && (
+          <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+              <h3 className="text-lg font-semibold text-gray-900">All Campaigns</h3>
+              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center text-sm">
+                <Plus className="h-4 w-4 mr-2" />
+                Create Campaign
+              </button>
+            </div>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[800px]">
+                <thead>
+                  <tr className="text-left text-sm text-gray-500 border-b">
+                    <th className="pb-3">Campaign Name</th>
+                    <th className="pb-3">Status</th>
+                    <th className="pb-3">Budget</th>
+                    <th className="pb-3">Spent</th>
+                   <th className="pb-3">Reach</th>
+                    <th className="pb-3">Vehicles</th>
+                    <th className="pb-3">Duration</th>
+                    <th className="pb-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {campaigns.map((campaign) => (
+                    <tr key={campaign.id} className="border-b border-gray-100">
+                      <td className="py-4 font-medium text-gray-900">{campaign.name}</td>
+                      <td className="py-4">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(campaign.status)}`}>
+                          {campaign.status}
+                        </span>
+                      </td>
+                      <td className="py-4 text-gray-600">₹{campaign.budget.toLocaleString()}</td>
+                      <td className="py-4 text-gray-600">₹{campaign.spent.toLocaleString()}</td>
+                     <td className="py-4 text-gray-600">{campaign.reach.toLocaleString()}</td>
+                      <td className="py-4 text-gray-600">{campaign.vehicles}</td>
+                      <td className="py-4 text-gray-600 text-sm">
+                        {new Date(campaign.startDate).toLocaleDateString()} - {new Date(campaign.endDate).toLocaleDateString()}
+                      </td>
+                      <td className="py-4">
+                        <div className="flex space-x-2">
+                          <button className="p-1 text-gray-400 hover:text-blue-600">
+                            <Eye className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'analytics' && (
+          <div className="space-y-6">
+            <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Performance Analytics</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-medium text-gray-900 mb-3">Campaign Performance</h4>
+                  <div className="bg-gray-50 rounded-lg h-48 sm:h-64 flex items-center justify-center">
+                    <p className="text-gray-500">Chart visualization would go here</p>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 mb-3">Geographic Distribution</h4>
+                  <div className="bg-gray-50 rounded-lg h-48 sm:h-64 flex items-center justify-center">
+                    <p className="text-gray-500">Map visualization would go here</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'vehicles' && (
+          <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Active Vehicles</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {Array.from({ length: 6 }, (_, i) => (
+                <div key={i} className="border border-gray-200 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-medium">Vehicle #{i + 1}</span>
+                    <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Active</span>
+                  </div>
+                  <div className="text-sm text-gray-600 space-y-1">
+                    <p>Driver: Rajesh Patel</p>
+                    <p>Route: S.G. Highway</p>
+                    <p>Coverage: High Traffic Areas</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default AdvertiserDashboard;
