@@ -73,13 +73,35 @@ const ContactUs = () => {
   });
 };
 
+  // const handleDemoSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setShowDemoSuccess(true);
+  //   setShowDemoForm(false);
+  //   setTimeout(() => setShowDemoSuccess(false), 5000);
+  //   setDemoFormData({ email: '', phone: '' });
+  // };
   const handleDemoSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
+
+  emailjs.send(
+    'service_2viivzc',      // same service ID used before
+    'template_c0t60os',     // same existing template ID
+    {
+      email: demoFormData.email,
+      phone: demoFormData.phone
+    },
+    '0nt1fF0yI5Ttot_Zg'       // your public API key
+  )
+  .then(() => {
     setShowDemoSuccess(true);
     setShowDemoForm(false);
     setTimeout(() => setShowDemoSuccess(false), 5000);
     setDemoFormData({ email: '', phone: '' });
-  };
+  })
+  .catch((error) => {
+    console.error('EmailJS Error:', error);
+  });
+};
 
   const handleDemoInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDemoFormData({
@@ -300,7 +322,7 @@ const ContactUs = () => {
               </div>
 
               {/* Quick Actions */}
-              {/* <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-4">Quick Actions</h3>
                 
                 {showDemoSuccess && (
@@ -325,7 +347,7 @@ const ContactUs = () => {
                     Driver Application
                   </Link>
                 </div>
-              </div> */}
+              </div> 
             </div>
           </div>
           
