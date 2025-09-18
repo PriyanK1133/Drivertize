@@ -114,13 +114,13 @@ const ContactUs = () => {
     {
       icon: <Phone className="h-6 w-6 text-blue-600" />,
       title: 'Phone',
-      details: ['+91 88662 86211', '+91 97279 44535'],
-      description: 'Call us during business hours'
+      details: ['+91 88662 86211', '+91 99790 82032'],
+      description: 'Feel free to call us at any time.'
     },
     {
       icon: <Mail className="h-6 w-6 text-green-600" />,
       title: 'Email',
-      details: ['bathanikeyur@gmail.com'],
+      details: ['drivertize.ad@gmail.com'],
       description: 'We respond within 24 hours'
     },
     {

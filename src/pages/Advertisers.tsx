@@ -17,7 +17,7 @@ const Advertisers = () => {
     {
       icon: <Clock className="h-8 w-8 text-purple-600" />,
       title: "Flexible Duration",
-      description: "Customizable campaigns from 1-12 months with flexible pricing options"
+      description: "Customizable campaigns from 1-3 months with flexible pricing options"
     },
     {
       icon: <Shield className="h-8 w-8 text-yellow-600" />,
@@ -131,7 +131,7 @@ const Advertisers = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Campaign Duration</span>
-                  <span className="text-2xl font-bold text-purple-600">1-12 Months</span>
+                  <span className="text-2xl font-bold text-purple-600">1-3 Months</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Target Areas</span>
@@ -175,7 +175,7 @@ const Advertisers = () => {
                 3
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Track & Measure</h3>
-              <p className="text-gray-600">Monitor your campaign performance with real-time tracking and detailed analytics</p>
+              <p className="text-gray-600">Monitor your campaign performance with transparent reporting to measure visibility</p>
             </div>
           </div>
         </div>

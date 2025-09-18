@@ -39,12 +39,12 @@ const Navigation = () => {
             >
               Home
             </Link>
-            <Link 
+            {/* <Link 
               to="/drivers" 
               className={`transition-colors ${isActive('/drivers') ? 'text-green-600 font-medium' : 'text-gray-700 hover:text-green-600'}`}
             >
               Drivers
-            </Link>
+            </Link> */}
             <button className="text-gray-700 hover:text-blue-600 transition-colors">
               <Link to="/about-us" className="text-gray-700 hover:text-blue-600 transition-colors">
                 About Us

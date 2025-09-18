@@ -27,7 +27,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center space-x-2 text-gray-400">
                   <Mail className="h-4 w-4" />
-                  <span>bathanikeyur@gmail.com</span>
+                  <span>drivertize.ad@gmail.com</span>
                 </div>
               </div>
             </div>
@@ -46,11 +46,11 @@ const Footer = () => {
                     For Advertisers
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="/drivers" className="text-gray-400 hover:text-white transition-colors">
                     For Drivers
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
